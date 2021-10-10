@@ -1,0 +1,28 @@
+.trashBtn {
+    font-size: 15px;
+    background-color: white;
+    border: 0px solid gray;
+}
+
+.action-div{
+    display: flex;
+}
+
+.button {
+	margin-bottom: 0 !important;
+	margin-right: .5rem;
+}
+
+.add-div{
+    width: 40%;
+}
+
+th{
+    color: gray;
+}
+
+th,
+td{
+    border: 1px solid #dedede;
+    text-align: center;
+}

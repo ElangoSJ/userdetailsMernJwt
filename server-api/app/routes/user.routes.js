@@ -10,7 +10,7 @@ module.exports = function(app) {
     next();
   });
 
-  app.get("/api/userdetails/all", controller.allAccess);
+  app.post("/api/userdetails/adduser",[authJwt.verifyToken], controller.adduser);
 
   app.get("/api/userdetails/user", [authJwt.verifyToken], controller.userBoard);
 
@@ -26,5 +26,7 @@ module.exports = function(app) {
     controller.adminBoard
   );
 
-  app.delete("/api/userdetails/deleteUser:id",[authJwt.verifyToken], controller.deleteUser);
+  app.post("/api/userdetails/deleteUser/:_id", controller.deleteUser);
+
+  app.get("/api/userdetails/getRoleList",[authJwt.verifyToken], controller.getRoleList);
 };

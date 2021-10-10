@@ -3,30 +3,35 @@ import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:8080/api/userdetails/";
 
-const getPublicContent = () => {
-  return axios.get(API_URL + "all");
+const addUserDetails = (userObj) => {
+    return axios.post(API_URL + "adduser",{userObj} , {headers: authHeader() });
 };
 
-const getUserBoard = () => {
-  return axios.get(API_URL + "user", { headers: authHeader() });
+const getUsers = () => {
+    return axios.get(API_URL + "user", { headers: authHeader() });
 };
 
 const getModeratorBoard = () => {
-  return axios.get(API_URL + "mod", { headers: authHeader() });
+    return axios.get(API_URL + "mod", { headers: authHeader() });
 };
 
 const getAdminBoard = () => {
-  return axios.get(API_URL + "admin", { headers: authHeader() });
+    return axios.get(API_URL + "admin", { headers: authHeader() });
 };
 
-const deleteUser =(userId)=>{
-  return axios.delete(API_URL+`deleteUser/${userId}`,{ headers: authHeader()})
+const deleteUser = (userId) => {
+    return axios.post(API_URL + `deleteUser/${userId}`)
+}
+
+const getRoleList = () => {
+    return axios.get(API_URL + 'getRoleList', { headers: authHeader() })
 }
 
 export default {
-  getPublicContent,
-  getUserBoard,
-  getModeratorBoard,
-  getAdminBoard,
-  deleteUser
+    addUserDetails,
+    getUsers,
+    getModeratorBoard,
+    getAdminBoard,
+    deleteUser,
+    getRoleList
 };

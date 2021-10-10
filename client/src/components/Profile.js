@@ -1,6 +1,6 @@
-import React, { useState ,useEffect} from "react";
+import React from "react";
 import { Redirect } from 'react-router-dom';
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { headerNameChange } from "./Home";
 import {faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,24 +11,13 @@ import EventBus from "../common/EventBus";
 const Profile = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
 
-  const [profilName,setProfileName]=useState('Profile');
-
-  const dispatch = useDispatch();
-
-const deleteUserData =(e) => UserService.deleteUser(currentUser.id).then(
+  const deleteUserData =(e) => UserService.deleteUser(currentUser.id).then(
       (response) => {
         if(response){
           EventBus.dispatch("logout");
         }        
       },
       (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
         if (error.response) {
           console.log("Unable to delete the user");
         }
@@ -46,7 +35,7 @@ const deleteUserData =(e) => UserService.deleteUser(currentUser.id).then(
 <div className="container">
       <header className="jumbotron d-flex ">
         <h3>
-          <strong>{currentUser.username}</strong> {headerName?headerName:profilName}
+          <strong>{currentUser.username}</strong> {headerName?headerName:'Profile'}
         </h3>
         {!headerName && (
           <div>
