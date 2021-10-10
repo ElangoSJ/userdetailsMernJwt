@@ -4,12 +4,18 @@ import AddUserForm from "./AddUser";
 import UserTable from "./UserTable";
 import Styles from "./UserAdmin.css";
 import UserService from '../../services/user.service';
+import { Button} from 'react-bootstrap';
+import AddUserPop from "./AddUserModal";
+import EditUserPop from "./EditUserModal";
 
 const UserAdmin = () => {
 
 	const [ users, setUsers ] = useState([]);
 	const [ roleList, setRoles ] = useState([]);
-	const [showModal,setShowModal]=useState(false)
+
+	const [show, setShow] = useState(false);
+	const [editUserPopup, setEditUserPopup] = useState(false);
+
 
 	const getUserDetails=()=>{
 		UserService.getUsers().then(
@@ -46,11 +52,20 @@ const UserAdmin = () => {
 	const [ currentUser, setCurrentUser ] = useState('')
 	const [ editing, setEditing ] = useState(false)
 
-  	const addUser = user => {
-		UserService.addUserDetails(user).then((res)=>{
-			getUserDetails();
-		})
+  	const addNewUser = (user) => {
+		  if(user.username && user.email && user.role){
+			alert(`Username : ${user.username},Email : ${user.email},role : ${user.role.length}`);
+			UserService.addUserDetails(user).then((res)=>{
+				if(res){
+					setShow(false);
+					getUserDetails();
+					return false;
+				}
+				
+			})
+		  }
 	}
+	
 
 	const deleteUser = id => {
 		setEditing(false)
@@ -62,7 +77,7 @@ const UserAdmin = () => {
 	const updateUser = (id, userDetail) => {
 		if(userDetail.id === id){
 			console.log(userDetail);
-			setEditing(false);
+			setEditUserPopup(false);
 			UserService.addUserDetails(userDetail).then((res)=>{
 				if(res){
 					getUserDetails();
@@ -74,7 +89,7 @@ const UserAdmin = () => {
 	}
 
 	const editRow = user => {
-		setEditing(true)
+		setEditUserPopup(true)
 		setCurrentUser({ id: user._id, name: user.username, username: user.email , role:user.roles, roleName: roleList.find(x=>x._id===user.roles[0]).name})
 	}
 
@@ -96,16 +111,25 @@ const UserAdmin = () => {
 							/>
 
 						</Fragment>
-					) : (
-						<Fragment>
-							<h2>Add user</h2>
-							<AddUserForm addUser={addUser} roles={roleList} />
-						</Fragment>
-					)}
+					) : ''}
 				</div>
 				<div className="flex-large">
 					<h3 className="m-3">User Details</h3>
 					<UserTable users={users} roles={roleList} editRow={editRow} deleteUser={deleteUser} />
+				</div>
+
+				<div>
+				<Button className="nextButton" onClick={()=>{setShow(true)}} >
+       				 Open Modal
+      			</Button>
+				<EditUserPop 	showEditUser={editUserPopup} 
+								onEditUserHide={()=>{setEditUserPopup(false)}} 
+								editing={editing}
+								setEditing={setEditing}
+								currentUser={currentUser}
+								updateUser={updateUser}
+								roles={roleList}></EditUserPop>
+				<AddUserPop show={show} addUserClick={addNewUser} roles={roleList} onHide={()=>{setShow(false)}}></AddUserPop>
 				</div>
 			</div>
     </div>
