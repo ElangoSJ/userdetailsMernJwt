@@ -5,26 +5,26 @@ import { chartColors } from "./PieChartColors";
 import { pieChartData } from "./PieChartData";
 
 const Chart = () => {
-       const pieOptions = {
-        legend: {
-          display: false,
-          position: "center",
-          legendCallback: function(chart) {
-            return [
-             
-            ];
-          }
-        },
-        elements: {
-          arc: {
-            borderWidth: 1
-          }
-        }
-      };
+  const pieOptions = {
+                  legend: {
+                    display: false,
+                    position: "center",
+                    legendCallback: function(chart) {
+                      return [
+                        
+                      ];
+                    }
+                  },
+                  elements: {
+                    arc: {
+                      borderWidth: 1
+                    }
+                  }
+                };
 
-      const coustomLabels = pieChartData.map((data)=>`${data.month}, ${data.store} Customers`)
-      const dataValue = pieChartData.map((data)=>[`${data.customer}`]);
-      const [data, setData] = useState({
+  const coustomLabels = pieChartData.map((data)=>`${data.month}, ${data.store} Customers`)
+  const dataValue = pieChartData.map((data)=>[`${data.customer}`]);
+  const [data, setData] = useState({
         maintainAspectRatio: false,
         responsive: false,
         labels: coustomLabels,
@@ -35,7 +35,7 @@ const Chart = () => {
                 hoverBackgroundColor: chartColors
             }
         ]
-    });
+  });
 
     return (
       <div>
@@ -49,7 +49,7 @@ const Chart = () => {
         </div>
       </div>
       
-      );
+    );
 }
 
 export default Chart

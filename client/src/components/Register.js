@@ -51,12 +51,10 @@ const vpassword = (value) => {
 const Register = () => {
   const form = useRef();
   const checkBtn = useRef();
-
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
-
   const { message } = useSelector(state => state.message);
   const dispatch = useDispatch();
 

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faUserPlus} from '@fortawesome/free-solid-svg-icons';
 
 const AddUserPop=(props)=>{	
+
     const initialFormState = { username: '', email: '',role:[] }
 	const [ user, setUser ] = useState(initialFormState);
     const  [disabled,setDisabled]=useState(true);
@@ -31,26 +32,23 @@ const AddUserPop=(props)=>{
     }
 
     return(
-
         <Modal show={props.show}  centered >
             <Modal.Header>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Add User</Modal.Title>
             </Modal.Header>
                 <Modal.Body>
-                <div>
-               
-                        <label>Username</label>
-                        <input type="text" name="username" value={user.username} onChange={handleInputChange} />
-                        <label>Email</label>
-                        <input type="text" name="email" value={user.email} onChange={handleInputChange} />
-                        <span>Roles:</span>
-                            <select  name="role" value={user.role} onChange={handleInputChange}>
-                                <option  />
-                                    {props.roles.map((role, index) => {
-                                    return <option key={index} value={role._id}>{role.name.charAt(0).toUpperCase()+ role.name.slice(1)}</option>;
-                                    })}
-                            </select> 
-            
+                <div>               
+                    <label>Username</label>
+                    <input type="text" name="username" value={user.username} onChange={handleInputChange} />
+                    <label>Email</label>
+                    <input type="text" name="email" value={user.email} onChange={handleInputChange} />
+                    <span>Roles:</span>
+                        <select  name="role" value={user.role} onChange={handleInputChange}>
+                            <option  />
+                                {props.roles?.map((role, index) => {
+                                return <option key={index} value={role._id}>{role.name.charAt(0).toUpperCase()+ role.name.slice(1)}</option>;
+                                })}
+                        </select>            
                  </div>
                 </Modal.Body>
             <Modal.Footer>
@@ -60,8 +58,7 @@ const AddUserPop=(props)=>{
                     Close
                 </Button>
             </Modal.Footer>
-		</Modal>
-        
+		</Modal>        
     )
 }
 

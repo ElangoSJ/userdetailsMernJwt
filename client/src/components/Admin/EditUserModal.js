@@ -28,32 +28,29 @@ const EditUserPop=(props)=>{
 
         setTimeout(()=>{
             setDisabled(true);
-        },500)
-        
+        },500)        
     }
 
     return(
         <Modal show={props.showEditUser}  centered >
             <Modal.Header>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Edit User</Modal.Title>
             </Modal.Header>
                 <Modal.Body>
-                <div >
+                    <div >                        
+                        <label>Name</label>
+                        <input type="text" name="name" value={user.name} onChange={handleInputChange} />
+                        <label>Username</label>
                         
-                            <label>Name</label>
-                            <input type="text" name="name" value={user.name} onChange={handleInputChange} />
-                            <label>Username</label>
-                            
-                            <input type="text" name="username" value={user.username} onChange={handleInputChange} />
+                        <input type="text" name="username" value={user.username} onChange={handleInputChange} />
 
-                            <label>Roles:</label>
-                                <select onChange={handleInputChange} name="role">
-                                    <option value={user.role}>{user.roleName}</option>
-                                    {props.roles.map((role, index) => {
-                                        return <option key={index} value={role._id}>{role.name.charAt(0).toUpperCase()+ role.name.slice(1)}</option>;
-                                    })}
-                                </select>                           
-                            
+                        <label>Roles:</label>
+                        <select onChange={handleInputChange} name="role">
+                            <option value={user.role}>{user.roleName}</option>
+                            {props.roles?.map((role, index) => {
+                                return <option key={index} value={role._id}>{role.name.charAt(0).toUpperCase()+ role.name.slice(1)}</option>;
+                            })}
+                        </select> 
                     </div>    
                 </Modal.Body>
             <Modal.Footer>

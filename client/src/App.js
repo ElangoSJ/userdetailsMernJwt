@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Router, Switch, Route, Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faHome,faUserSecret, faChartBar } from '@fortawesome/free-solid-svg-icons';
+import {faHome,faUserSecret, faChartBar, faWallet } from '@fortawesome/free-solid-svg-icons';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -13,6 +13,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import UserAdmin from "./components/Admin/UserAdmin";
 import Chart from "./components/charts/Charts";
+import Wallet from "./components/Wallet/wallet";
 
 import lineChart from "./components/charts/LineChart/LineChart" ;
 import barChart from "./components/charts/BarChart/BarChart" ;
@@ -30,6 +31,7 @@ import EventBus from "./common/EventBus";
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [showCharts, setShowshowCharts] = useState(false);
+  const [showWallet, setShowshowWallet] = useState(false);
 
   const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -48,6 +50,7 @@ const App = () => {
     if (currentUser) {
       setShowAdminBoard(currentUser.roles.includes("admin"));
       setShowshowCharts(currentUser.roles.includes("chart"));
+      setShowshowWallet(currentUser.roles.includes("wallet"));
     } else {
       setShowAdminBoard(false);
     }
@@ -82,6 +85,11 @@ const App = () => {
               </li>
             )}        
 
+          {(showWallet||showCharts)  && (
+            <Link to={"/Wallet"} className="nav-link">
+              <FontAwesomeIcon icon={faWallet} size={"2x"}/>
+            </Link>
+          )}
 
             {(showAdminBoard || showCharts)  && (
               <li className="nav-item mr-2">
@@ -135,6 +143,7 @@ const App = () => {
             <Route exact path="/pieChart" component={pieChart} />
             <Route path="/barChart" component={barChart} />
             <Route path="/scatterChart" component={scatterChart} />
+            <Route path="/wallet" component={Wallet}/>
           </Switch>
         </div>
 

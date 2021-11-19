@@ -32,36 +32,33 @@ const Profile = () => {
     <headerNameChange.Consumer>{
       (headerName)=>{
         return (
-<div className="container">
-      <header className="jumbotron d-flex ">
-        <h3>
-          <strong>{currentUser.username}</strong> {headerName?headerName:'Profile'}
-        </h3>
-        {!headerName && (
-          <div>
-             <button className="btn btn-gray pull-right float-right" onClick={deleteUserData}>
-              <FontAwesomeIcon icon={faTrash} size={"2x"} color={'gray'}/>
-            </button>
-            <button className="btn btn-gray pull-right float-right">
-              <FontAwesomeIcon icon={faEdit} size={"2x"} color={'gray'}/>
-            </button>            
-          </div>
-        )}
-         
-      </header>
-      <p>
-        <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}
-        {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-      </p>
-      <p>
-        <strong>Id:</strong> {currentUser.id}
-      </p>
-      <p>
-        <strong>Email:</strong> {currentUser.email}
-      </p>
-      <strong>Authorities:</strong> {currentUser.roles}     
-    </div>
-        )
+      <div className="container">
+            <header className="jumbotron d-flex ">
+              <h3><strong>{currentUser.username}</strong> {headerName?headerName:'Profile'}</h3>
+              
+              {!headerName && (
+                <div>
+                  <button className="btn btn-gray pull-right float-right" onClick={deleteUserData}>
+                    <FontAwesomeIcon icon={faTrash} size={"1x"} color={'gray'}/>
+                  </button>        
+                </div>
+              )}              
+              </header>
+
+              <p>
+                <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}
+                {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
+              </p>
+
+              <p>
+                <strong>Id:</strong> {currentUser.id}
+              </p>
+
+              <p>
+                <strong>Email:</strong> {currentUser.email}
+              </p>
+              <strong>Authorities:</strong> {currentUser.roles}     
+      </div>)
       }
       }
     

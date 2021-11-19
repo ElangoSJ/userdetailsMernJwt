@@ -25,4 +25,19 @@ th,
 td{
     border: 1px solid #dedede;
     text-align: center;
+    vertical-align: sub;
+}
+
+.created{
+    background-color: #72e772;
+    width: 90px;
+    border-radius: 5px;
+    color: white;
+}
+
+.waited{
+    background-color: #ef6e64;
+    width: 125px;
+    color: white;
+    border-radius: 5px;
 }
